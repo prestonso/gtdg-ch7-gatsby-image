@@ -1,5 +1,24 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
-export default function Home() {
-  return <div>Hello world!</div>
+export default function Home({ data }) {
+  return <Img
+    fluid={data.file.childImageSharp.fluid}
+    alt="Pikes Peak, known as Tava in the Ute language and Heey-otoyoo' in the Arapaho language"
+  />
 }
+
+export const query = graphql`
+  {
+    file(relativePath: {
+      eq: "pikes-peak.jpg"
+    }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
